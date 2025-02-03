@@ -1,0 +1,106 @@
+<!-- layout.html -->
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <title th:text="${pageTitle}"></title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <style>
+
+        nav {
+            background-color: #2f9e44; /* Pickle-ball court green */
+            padding: 10px;
+            border-radius: 8px;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            text-align: center;
+        }
+
+        nav ul li {
+            display: inline;
+            margin: 10px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 8px 20px;
+            border-radius: 4px;
+            background-color: #ffcb00; /* Pickle-ball paddle yellow */
+            transition: background-color 0.3s;
+        }
+
+        nav ul li a:hover {
+            background-color: #ff8c00; /* Darker yellow for hover effect */
+        }
+
+        nav ul li span {
+            font-size: 14px;
+            color: #fff;
+        }
+
+        .pickleball-icon {
+            width: 20px;
+            height: 20px;
+            background-image: url('pickleball-icon.png'); /* Add your pickleball icon here */
+            background-size: cover;
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 8px;
+        }
+        .event-btn {
+            background-color: #e94e77; /* Pickle-ball event theme color */
+            padding: 8px 20px;
+            border-radius: 4px;
+            color: white;
+            font-weight: bold;
+        }
+
+        .event-btn:hover {
+            background-color: #e32b56; /* Darker event button color */
+        }
+        
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a th:href="@{/users/}"><span class="pickleball-icon"></span>Home</a></li>
+            <li><a th:href="@{/users/register}">Register</a></li>
+
+            <li sec:authorize="isAnonymous()">
+                <a th:href="@{/users/loginform}">Login</a>
+            </li>
+            
+            <li sec:authorize="isAuthenticated()">
+                <a th:href="@{/users/logout}">Logout</a>
+            </li> 
+            <li sec:authorize="isAuthenticated()">
+                <a th:href="@{/events}" class="event-btn">Events</a>
+            </li> 
+            <li sec:authorize="isAuthenticated()">
+                <a th:href="@{/events/create}" class="event-btn">Create Event</a>
+            </li> 
+            <li sec:authorize="isAuthenticated()">
+                <a th:href="@{/events/search}" class="event-btn">Search Events</a>
+            </li>
+             
+            <li>
+                <span sec:authorize="isAuthenticated()" class="logged-in-msg">Logged in as <span sec:authentication="name"></span></span>
+                <span th:each="authority : ${#authentication.authorities}" th:text="${authority.authority}"></span>
+            </li>
+            <li>
+                <span sec:authorize="isAnonymous()">Not logged in</span>
+            </li>
+        </ul>
+    </nav>
+    <div layout:fragment="content" class="pickleball-court">
+        <!-- Content goes here -->
+    </div>
+</body>
+</html>
