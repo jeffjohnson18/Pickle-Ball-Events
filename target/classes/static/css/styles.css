@@ -1,16 +1,14 @@
 /* styles.css */
 
 :root {
-    --primary-color: #681008;
-    --hover-color: #9d180c;
     --secondary-color: #2b2d42;
     --background-color: #edf2f4;
     --text-color: #2b2d42;
     --text-on-dark: #edf2f4;
     --table-border-color: #8d99ae;
-    --table-header-color: #9f463e;
-    --table-row-color: #681008;
-    --button-color: #3d040e;
+    --table-header-color: #008000;  /* Pickleball yellow */
+    --table-row-color: #2b5e15;  /* Lighter yellow for rows */
+    --button-color: #008000; /* Green for buttons */
     --button-text-color: #edf2f4;
 }
 
